@@ -30,9 +30,19 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/line-spin-clockwise-fade-rotating.css",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "src/style.js",
+              "node_modules/jquery/dist/jquery.js",
+               "node_modules/datatables.net/js/jquery.dataTables.js",
+               "node_modules/bootstrap/dist/js/adminlte.min.js"
+
+            ]
           },
           "configurations": {
             "production": {
@@ -56,13 +66,23 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "fronted:build",
+            "proxyConfig": "src/proxy.config.json"
+          },
           "configurations": {
             "production": {
               "browserTarget": "fronted:build:production"
@@ -100,5 +120,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "6ac707fd-fa3a-4c26-8ed2-ac1d37758e03"
   }
 }

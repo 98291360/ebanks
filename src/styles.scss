@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files*/
+@import "/opt/lampp/htdocs/serviceweb/fronted/node_modules/bootstrap/dist/css/adminlte.min.css";
+@import "/opt/lampp/htdocs/serviceweb/fronted/node_modules/bootstrap/plugins/fontawesome-free/css/all.min.css";
+@import "/opt/lampp/htdocs/serviceweb/fronted/node_modules/bootstrap/plugins/icheck-bootstrap/icheck-bootstrap.min.css";
+@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback";
+@import "../node_modules/alertifyjs/build/css/alertify.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+@import "../node_modules/alertifyjs//build/css/themes/default.min.css";

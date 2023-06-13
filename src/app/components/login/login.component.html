@@ -1,0 +1,76 @@
+
+<div class="container">
+
+  <!-- Outer Row -->
+  <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+          <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body p-0">
+                  <!-- Nested Row within Card Body -->
+                  <div class="row">
+
+
+                      <div class="col-lg-6 d-none d-lg-block bg-login-image"> <img src="/assets/img/niger1.svg" style="height: 100%; width: 100%;"  ></div>
+                      <div class="col-lg-6">
+                          <div class="p-5">
+                              <div class="text-center">
+                                  <h1 class="h4 text-gray-900 mb-4">Connexion</h1>
+                              </div>
+                              <form (ngSubmit) = "submit()" [formGroup] = 'form'>
+                                  <div class="form-group">
+                                      <input type="email" class="form-control rounded-5" placeholder="Email" name="email" formControlName="email"  [ngClass]="{'is-invalid' : submitted && f.email.errors}">
+
+                                      <div *ngIf="submitted && f.email.errors" class="invalid-feedback" >
+                                        <div *ngIf="f.email.errors.required" >
+                                          Email is required
+                                        </div>
+                                        <div *ngIf="f.email.errors.email" >
+                                          Email must be a valid email address
+                                        </div>
+                                      </div>   </div>
+                                      <div class="input-group mb-3">
+                                        <input type="password" class="form-control rounded-5 " placeholder="Password"  formControlName="password" [ngClass]="{'is-invalid' : submitted && f.password.errors}" >
+
+
+
+                                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback" >
+                                          <div *ngIf="f.password.errors.required" >
+                                            Password is required
+                                          </div>
+                                          <div *ngIf="f.password.errors.minlength" >
+                                            Password must be atleast 6 characters
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                  <div class="form-group">
+                                      <div class="custom-control custom-checkbox small">
+                                          <input type="checkbox" class="custom-control-input " id="customCheck">
+                                          <label class="custom-control-label" for="customCheck">Se Rappeler de Moi</label>
+                                      </div>
+                                  </div>
+                                  <button type="submit" class="btn btn-primary btn-user btn-block">
+                                      Continuer
+                                  </button>
+
+                              </form>
+                              <hr>
+                              <div class="text-center">
+                                  <a class="small" routerLink="/forgot-password">Mot de passe oubliez ?</a>
+                              </div>
+                              <div class="text-center">
+                                  <a class="small" routerLink="/register">Créer un compte!</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+
+</div>

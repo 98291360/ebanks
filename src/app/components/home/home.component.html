@@ -1,0 +1,1010 @@
+<div class="bg-success fixed-top rounded-1 " ><p class="text-center mt-2" style="font-size: x-large; font-style: italic; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; scroll-timeline-axis: 1s;"><b>Kasuar Nijar</b></p></div>
+<div class="container">
+  <nav class="navbar navbar-expand-lg fixed-top navbar-kleo normal-nav sticky-nav mt-5 justify-content-center" >
+    <a class="navbar-brand logo" routerLink=""><img src="/assets/img/niger1.svg" style="height: 70%; width: 70%;"  >&nbsp;&nbsp;</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <i class="fas fa-bars" style="color: green;"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ml-auto">
+        <li    class="nav-item">
+          <a  routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link "><i class="fa fa-home"  style="color: green; font-size: x-large;"  routerLinkActive="active" style="color: green;"></i>&nbsp;Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a  class="nav-link dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false" id="navbardrop"> <i class=" fas fa-solid fa-money-check-dollar fa-flip" style="--fa-animation-duration: 35s;" ></i>&nbsp;Comptes</a>
+          <div class="dropdown-menu">
+            <a   class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#consulterCompte">&nbsp;Consulter</a>
+          </div>
+        </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false" id="navbardrop"> <i class="fas fa-solid fa-sync fa-flip" style="--fa-animation-duration: 20s;" ></i>&nbsp;Operations</a>
+          <div class="dropdown-menu">
+            <a   class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#retraitSignature">&nbsp;Retrait</a>
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#versementSignature">&nbsp;Versement</a>
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#historique">&nbsp;Historique</a>
+          </div>
+        </li>
+        <li  *ngIf="this.admin" class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"
+          data-bs-toggle="dropdown" aria-expanded="false" id="navbardrop"><i class="fas fa-solid fa-cog fa-spin fa-spin-reverse"></i>&nbsp;Configuration</a>
+          <div class="dropdown-menu">
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#ListOperation">&nbsp;Liste Des Operations</a>
+            <a  class="dropdown-item"  data-bs-toggle="modal"  data-bs-target="#ListClient">&nbsp;Liste Des Clients</a>
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#ListCompte">&nbsp;Liste Des Comptes</a>
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#addClient">&nbsp;Ajouter Client</a>
+            <a  class="dropdown-item" data-bs-toggle="modal"  data-bs-target="#addCompte">&nbsp;Ajouter Compte</a>
+
+          </div>
+        </li>
+              <!-- Icons  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-->
+              <!-- Notifications -->
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false" id="navbardrop" >
+                    <i class="fas fa-bell " style="color: green; font-size: x-large;" ></i>
+                    <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <div class="dropdown-menu">
+                  <a data-bs-toggle="modal"  data-bs-target="#profil" class="dropdown-item"><i class="fas fa-user-circle"></i>&nbsp;Profile</a>
+                  <a  (click)="logout()" class="dropdown-item"><i class="fas fa-sign-out-alt" ></i>&nbsp;Déconnexion  </a>
+                </div>
+              </li>
+
+              <li [hidden] = "this.connexion == true"   class="nav-item">
+                <a  routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link "><i class="fa fa-sign-in-alt" routerLinkActive="active" ></i>&nbsp;Se connecter</a>
+              </li>
+
+        <li  [hidden] ="this.connexion == false" class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false" id="navbardrop" >
+            <img class="rounded-circle" src="/assets/img/avatar5.png" style="height: 30px; width: 30px;" alt="" > &nbsp;Bienvenue! {{this.name}}
+          </a>
+          <div class="dropdown-menu">
+            <a data-bs-toggle="modal"  data-bs-target="#profil" class="dropdown-item"><i class="fas fa-user-circle"></i>&nbsp;Profile</a>
+            <a  (click)="logout()" class="dropdown-item"><i class="fas fa-sign-out-alt" ></i>&nbsp;Déconnexion  </a>
+            <a data-bs-toggle="modal"  data-bs-target="#signature" class="dropdown-item"><i class="fas fa-pen"></i>&nbsp;MISE A JOUR SIGNATURE </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
+
+<div  id="divChart"  >
+  <canvas  id="myChart"></canvas>
+  <canvas  id="myLineChart"></canvas>
+
+</div>
+
+<footer class="bg-dark text-center text-white fixed-bottom">
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-facebook-f"></i
+      ></a>
+
+      <!-- Twitter -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-linkedin-in"></i
+      ></a>
+
+      <!-- Github -->
+      <a mdbRipple class="btn btn-outline-light btn-floating m-1" href="#!" role="button"
+        ><i class="fab fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © {{this.myDate}} All Right Reserved <br>
+    Developed By MSSO-Soft
+  </div>
+  <!-- Copyright -->
+</footer>
+
+<!-- #######################################"Start VersementSignature Modal################################################################################-->
+<div class="modal " id="versementSignature" tabindex="-1" aria-labelledby="versementSignature" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Versement</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "VersementSignatureSubmit()" [formGroup] ="versementForm"  class="px-3" autocomplete="nope">
+
+ <p class="text-danger pl-1"></p>
+ <div class="input-group mb-3">
+   <input type="text" class="form-control" placeholder="MONTANT" formControlName="montant"   [ngClass]="{'is-invalid' : submitted && fv.montant.errors}">
+   <div class="input-group-append">
+     <div class="input-group-text">
+       <span class="fas fa-bank"></span>
+     </div>
+   </div>
+   <div *ngIf="submitted && fv.montant['errors']" class="invalid-feedback" >
+     <div *ngIf="fv.montant.errors['required']" >
+       Montant De Compte is required
+     </div>
+
+   </div>
+ </div>
+
+ <p class="text-danger pl-1"></p>
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Numéro de compte" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && fv.num_compte.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fv.num_compte['errors']" class="invalid-feedback" >
+              <div *ngIf="fv.num_compte.errors['required']" >
+                Numéro De Compte is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && fv.signature.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-pen fa-flip"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fv.signature['errors']" class="invalid-feedback" >
+              <div *ngIf="fv.signature.errors['required']" >
+                Signature is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  >Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--######################################"End RetraitSignature Modal######################################################################################-->
+
+
+
+<!-- #######################################"Start RetraitSignature Modal################################################################################-->
+<div class="modal " id="retraitSignature" tabindex="-1" aria-labelledby="retraitSignature" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">RETRAIT</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "RetraitSignatureSubmit()" [formGroup] ="RetraitForm"  class="px-3" autocomplete="nope">
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="MONTANT" formControlName="montant"   [ngClass]="{'is-invalid' : submitted && fr.montant.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fr.montant['errors']" class="invalid-feedback" >
+              <div *ngIf="fr.montant.errors['required']" >
+                Montant De Compte is required
+              </div>
+
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Numéro de compte" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && fr.num_compte.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fr.num_compte['errors']" class="invalid-feedback" >
+              <div *ngIf="fr.num_compte.errors['required']" >
+                Numéro De Compte is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && fr.signature.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-pen fa-flip"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fr.signature['errors']" class="invalid-feedback" >
+              <div *ngIf="fr.signature.errors['required']" >
+                Signature is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  >Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner type="line-spin-clockwise-fade-rotating"></ngx-spinner>
+
+<!--######################################"End RetraitSignature Modal######################################################################################-->
+
+<!--################################# Start Consulter Compte Modal################################################################################-->
+<div  class="modal " id="consulterCompte" tabindex="-1" aria-labelledby="consulterCompte" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Consulter Compte</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "consulterComptesubmit()" [formGroup] ="consulterCompteform"  class="px-3" autocomplete="nope">
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Numéro de compte" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && f.num_compte.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.num_compte['errors']" class="invalid-feedback" >
+              <div *ngIf="f.num_compte.errors['required']" >
+                Numéro De Compte is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && f.signature.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-pen fa-flip"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.signature['errors']" class="invalid-feedback" >
+              <div *ngIf="f.signature.errors['required']" >
+                Signature is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  (click)="openPopup()">Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End Consulter Compte  Modal######################################################################################-->
+
+<!--############################################ Compte Details Modal################################################################################-->
+
+<div *ngIf="this.consulterCompteModal" class="modal" role="compteDetails" tabindex="-1" [ngStyle]="{'display':displayStyle}"  >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info">
+        <h4 class="modal-title text-light">Compte Details</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <div class="justify-content-center"> <h3><b>NUMERO DE COMPTE:</b> {{this.num_compte}} </h3> </div>
+         <div class="justify-content-center"> <h3><b>SOLDE           : </b>{{this.solde}} </h3> </div>
+         <div class="justify-content-center"> <h3><b>TYPE            :</b> {{this.type}} </h3> </div>
+         <div class="justify-content-center"> <h3><b>DATE CREATION   :</b> {{this.created_at}} </h3> </div>
+         <div class="justify-content-center"> <h3><b>ETAT            :</b> ACTIVE</h3> </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+      <!--############################################compteDetails End--------------------------------------------------------------------------->
+  <!--##########################"" Start SignatureUpdate Modal################################################################################-->
+  <div class="modal"  id="signature" tabindex="-1" aria-labelledby="signature" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-dark ">
+          <h4 class="modal-title text-light">SIGNATURE UPDATE</h4>
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit) = "SignatureUpdatesubmit()" [formGroup] ="RetraitForm"  class="px-3" autocomplete="nope">
+
+
+
+            <p class="text-danger pl-1"></p>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="NUMERO DE COMPTE" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && fr.num_compte.errors}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-bank"></span>
+                </div>
+              </div>
+              <div *ngIf="submitted && fr.num_compte['errors']" class="invalid-feedback" >
+                <div *ngIf="fr.num_compte.errors['required']" >
+                  Numéro de Compte is required
+                </div>
+
+              </div>
+            </div>
+
+            <p class="text-danger pl-1"></p>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && fr.signature.errors}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-pen fa-flip"></span>
+                </div>
+              </div>
+              <div *ngIf="submitted && fr.signature['errors']" class="invalid-feedback" >
+                <div *ngIf="fr.signature.errors['required']" >
+                  New Signature is required
+                </div>
+
+              </div>
+            </div>
+
+            <p class="text-danger pl-1"></p>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control" placeholder="Confirm New Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && fr.signature.errors}">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-pen fa-flip"></span>
+                </div>
+              </div>
+              <div *ngIf="submitted && fr.signature['errors']" class="invalid-feedback" >
+                <div *ngIf="fr.signature.errors['required']" >
+                 New Signature is required
+                </div>
+
+              </div>
+            </div>
+
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block" data-loading-text="Loanding..." >Continuer</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Fermé</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--########################################End UpdateSignature Modal######################################################################################-->
+
+  <!--########################################Start Profil Modal######################################################################################-->
+  <div  class="modal" id="profil" tabindex="-1" aria-labelledby="profil" aria-hidden="true"  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+          <h4 class="modal-title text-light">Profil Details</h4>
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+           <div class="justify-content-center"> <h3><b>NOM & PRENOM:</b> {{this.name}} </h3> </div>
+           <div class="justify-content-center"> <h3><b>Email           : </b>{{this.email}} </h3> </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Fermé</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--########################################End Profil Modal######################################################################################-->
+  <!--########################################Start ClientList Modal######################################################################################-->
+  <div  class="modal" id="ListClient" tabindex="-1" aria-labelledby="ListClient" aria-hidden="true"  >
+    <div class="modal-dialog modal-dialog-centered modal-xl"  >
+      <div class="modal-content">
+        <div class="modal-header bg-dark ">
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <button class="btn btn-secondary mb-3" (click)="printThisPage()">Print This Page</button>
+
+          <table datatable [dtOptions]="dtoptions" [dtTrigger] = "dtTrigger" class="table table-striped " style="width: 100%;">
+            <thead>
+              <tr>
+              <th>#</th>
+              <th>NOM & PRENOM</th>
+              <th>ADRESSE  </th>
+              <th>TELEPHONE  </th>
+              <th>NUMERO DE COMPTES </th>
+              <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of clients">
+                <td>{{client.id}} </td>
+                <td>{{client.name}} </td>
+                <td>{{client.adresse}} </td>
+                <td>{{client.telephone}} </td>
+                <td>{{client.num_compte}} </td>
+                <td>
+                 <a class="btn btn-success" (click)="updateClient(client.id)" data-bs-toggle="modal"  data-bs-target="#updateClient" > <i class="fa fa-edit"></i></a>
+                 <a class="btn btn-danger ml-1" (click)="deleteClient(client.id)" > <i class="fa fa-trash" ></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Fermé</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--########################################End ClientList Modal######################################################################################-->
+
+  <!--########################################Start CompteList Modal######################################################################################-->
+  <div  class="modal" id="ListCompte" tabindex="-1" aria-labelledby="ListCompte" aria-hidden="true"  >
+    <div class="modal-dialog modal-dialog-centered modal-xl" >
+      <div class="modal-content">
+        <div class="modal-header bg-dark ">
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <button class="btn btn-secondary mb-3" (click)="printThisPage()">Print This Page</button>
+
+          <table datatable [dtOptions]="dtoptions" [dtTrigger] = "dtTrigger" class="table table-striped " style="width: 100%;">
+            <thead>
+              <tr>
+              <th>#</th>
+
+              <th>NUMERAUX DE COMPTES </th>
+              <th>TYPES</th>
+              <th>SOLDES </th>
+              <th>NOM & PRENOM </th>
+              <th>DATES DE CREATION </th>
+              <th>ETAT </th>
+              <th>ACTIONS</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let compte of comptes">
+                <td>{{compte.id}} </td>
+                <td>{{compte.num_compte}} </td>
+                <td>{{compte.type}} </td>
+                <td>{{compte.solde}} </td>
+                <td>{{compte.name}} </td>
+                 <td>{{this.datePipe.transform(compte.created_at, 'dd/MM/yyyy')}} </td>
+                <td>
+                  <span [hidden]="compte.etat==0" class="badge bg-success">Active</span>
+                  <span [hidden]="compte.etat==1" class="badge bg-danger">Active</span>
+                </td>
+                <td>
+
+                  <a class="btn btn-primary ml-1"   (click)="updateCompte(compte.id)" data-bs-toggle="modal"  data-bs-target="#updateCompte"> <i class="fa fa-edit"></i></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Fermé</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--########################################End CompteList Modal######################################################################################-->
+
+   <!--########################################Start OperationList Modal######################################################################################-->
+   <div  class="modal" id="ListOperation" tabindex="-1" aria-labelledby="ListOperation" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="dialog">
+      <div class="modal-content " >
+        <div class="modal-header bg-dark ">
+          <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <button class="btn btn-secondary mb-3" (click)="printThisPage()">Print This Page</button>
+
+
+
+          <table datatable [dtOptions]="dtoptions" [dtTrigger] = "dtTrigger" class="table table-striped " style="width: 100%;" >
+            <thead>
+              <tr>
+              <th>#</th>
+              <th>TYPES</th>
+              <th>MONTANT </th>
+              <th>DATES OPERATIONS </th>
+              <th>NUMERAUX DE COMPTES </th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operation of operations">
+                <td>{{operation.id}} </td>
+                <td>{{operation.type}} </td>
+                <td>{{operation.montant}} </td>
+                <td>{{operation.date_operation}} </td>
+                <td>{{operation.num_compte}} </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Fermé</button>
+
+        </div>
+    </div>
+  </div>
+  </div>
+  <!--########################################End Operation List Modal######################################################################################-->
+
+
+<!--################################# Start Consulter Historique Modal################################################################################-->
+<div  class="modal " id="historique" tabindex="-1" aria-labelledby="historique" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Consulter Historiques</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "consulterHistoriquesubmit()" [formGroup] ="consulterCompteform"  class="px-3" autocomplete="nope">
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Numéro de compte" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && f.num_compte.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.num_compte['errors']" class="invalid-feedback" >
+              <div *ngIf="f.num_compte.errors['required']" >
+                Numéro De Compte is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && f.signature.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-pen fa-flip"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && f.signature['errors']" class="invalid-feedback" >
+              <div *ngIf="f.signature.errors['required']" >
+                Signature is required
+              </div>
+
+            </div>
+          </div>
+          <p class="text-danger pl-1"></p>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  (click)="openconsulterHistoriqueModalPopup()">Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End Consulter Historique  Modal######################################################################################-->
+
+<!--########################################Start OperationList Modal######################################################################################-->
+   <div  *ngIf="this.consulterHistoriqueModal" class="modal" role="retraitModal" tabindex="-1" [ngStyle]="{'display':displayStyle}" >
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="dialog">
+      <div class="modal-content " >
+        <div class="thumbnail">
+          <div class="modal-header bg-dark ">
+            <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+
+          <table datatable [dtOptions]="dtoptions" [dtTrigger] = "dtTrigger" class="table table-striped " style="width: 100%;" >
+            <thead>
+              <tr>
+              <th>#</th>
+              <th>TYPES</th>
+              <th>MONTANT </th>
+              <th>DATES OPERATIONS </th>
+              <th>NUMERAUX DE COMPTES </th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let operation of operations">
+                <td>{{operation.id}} </td>
+                <td>{{operation.type}} </td>
+                <td>{{operation.montant}} </td>
+                <td>{{operation.date_operation}} </td>
+                <td>{{operation.num_compte}} </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary"  (click)="closeconsulterHistoriqueModalPopup()">Fermé</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!--########################################End CompteList Modal######################################################################################-->
+
+<!--################################# Start ADD Customers Modal################################################################################-->
+<div  class="modal " id="addClient" tabindex="-1" aria-labelledby="addClient" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Ajouter Un Client</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "addClientSubmit()" [formGroup] ="addClientForm"  class="px-3" autocomplete="nope">
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="NOM & PRENOM" formControlName="name"   [ngClass]="{'is-invalid' : submitted && fc.name.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fc.name['errors']" class="invalid-feedback" >
+              <div *ngIf="fc.name.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="ADRESSE" formControlName="adresse"   [ngClass]="{'is-invalid' : submitted && fc.adresse.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-location-dot"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fc.adresse['errors']" class="invalid-feedback" >
+              <div *ngIf="fc.adresse.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="TELEPHONE" formControlName="telephone"   [ngClass]="{'is-invalid' : submitted && fc.telephone.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-phone"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fc.telephone['errors']" class="invalid-feedback" >
+              <div *ngIf="fc.telephone.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Signature" formControlName="signature"   [ngClass]="{'is-invalid' : submitted && fc.signature.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-pen fa-flip"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fc.signature['errors']" class="invalid-feedback" >
+              <div *ngIf="fc.signature.errors['required']" >
+                Signature is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  (click)="openPopup()">Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End ADD Customers  Modal######################################################################################-->
+
+
+<!--################################# Start ADD Account Modal################################################################################-->
+<div  class="modal " id="addCompte" tabindex="-1" aria-labelledby="addCompte" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Ajouter Un Compte</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "addCompteSubmit()" [formGroup] ="addCompteForm"  class="px-3" autocomplete="nope">
+
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <select type="text" class="form-control" placeholder="TYPE" formControlName="type"   [ngClass]="{'is-invalid' : submitted && fct.type.errors}">
+              <option value="Courant">Courant</option>
+              <option value="Epargne">Epargne</option>
+            </select>
+
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-bank"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fct.type['errors']" class="invalid-feedback" >
+              <div *ngIf="fct.type.errors['required']" >
+                Type  is required
+              </div>
+            </div>
+          </div>
+
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <select class="form-control" placeholder="Client" formControlName="client_id"   [ngClass]="{'is-invalid' : submitted && fct.type.errors}" id="">
+              <option *ngFor="let client of clientsWithouCompte" value="{{client.id}} ">{{client.name}} </option>
+              <option value="" disabled>Select</option>
+            </select>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fct.client_id['errors']" class="invalid-feedback" >
+              <div *ngIf="fct.client_id.errors['required']" >
+                User is required
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  (click)="openPopup()">Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End ADD Customers  Modal######################################################################################-->
+
+<!--################################# Start UPDATE Customers Modal################################################################################-->
+<div   class="modal " id="updateClient" tabindex="-1" aria-labelledby="updateClient" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Modifier Un Client</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "updateClientSubmit()" [formGroup] ="Clientform"  class="px-3" autocomplete="nope">
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="hidden" class="form-control" placeholder="" formControlName="id"   [ngClass]="{'is-invalid' : submitted && fcUp.id.errors}">
+
+            <div *ngIf="submitted && fcUp.id['errors']" class="invalid-feedback" >
+              <div *ngIf="fcUp.id.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="NOM & PRENOM" formControlName="name"   [ngClass]="{'is-invalid' : submitted && fcUp.name.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fcUp.name['errors']" class="invalid-feedback" >
+              <div *ngIf="fcUp.name.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="ADRESSE" formControlName="adresse"   [ngClass]="{'is-invalid' : submitted && fcUp.adresse.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-location-dot"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fcUp.adresse['errors']" class="invalid-feedback" >
+              <div *ngIf="fcUp.adresse.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="TELEPHONE" formControlName="telephone"   [ngClass]="{'is-invalid' : submitted && fcUp.telephone.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-phone"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fcUp.telephone['errors']" class="invalid-feedback" >
+              <div *ngIf="fcUp.telephone.errors['required']" >
+                Name  is required
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block"  >Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End UPDATE Customers  Modal######################################################################################-->
+
+<!--################################# Start UPDATE Compte Modal################################################################################-->
+<div   class="modal " id="updateCompte" tabindex="-1" aria-labelledby="updateCompte" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-dark ">
+        <h4 class="modal-title text-light">Modifier Un Compte</h4>
+        <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit) = "updateCompteSubmit()" [formGroup] ="Compteform"  class="px-3" autocomplete="nope">
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="hidden" class="form-control" placeholder="" formControlName="id"   [ngClass]="{'is-invalid' : submitted && fCup.id.errors}">
+
+            <div *ngIf="submitted && fCup.id['errors']" class="invalid-feedback" >
+              <div *ngIf="fCup.id.errors['required']" >
+
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="hidden" class="form-control" placeholder="" formControlName="client_id"   [ngClass]="{'is-invalid' : submitted && fCup.client_id.errors}">
+
+            <div *ngIf="submitted && fCup.client_id['errors']" class="invalid-feedback" >
+              <div *ngIf="fCup.client_id.errors['required']" >
+
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="hidden" class="form-control" placeholder="" formControlName="num_compte"   [ngClass]="{'is-invalid' : submitted && fCup.num_compte.errors}">
+
+            <div *ngIf="submitted && fCup.num_compte['errors']" class="invalid-feedback" >
+              <div *ngIf="fCup.num_compte.errors['required']" >
+
+              </div>
+            </div>
+          </div>
+
+          <p class="text-danger pl-1"></p>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="TYPE" formControlName="type"   [ngClass]="{'is-invalid' : submitted && fCup.type.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fCup.type['errors']" class="invalid-feedback" >
+              <div *ngIf="fCup.type.errors['required']" >
+                Type  is required
+              </div>
+            </div>
+          </div>
+
+            <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="ETAT" formControlName="etat"   [ngClass]="{'is-invalid' : submitted && fCup.etat.errors}">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-location-dot"></span>
+              </div>
+            </div>
+            <div *ngIf="submitted && fCup.etat['errors']" class="invalid-feedback" >
+              <div *ngIf="fCup.etat.errors['required']" >
+                Etat  is required
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block" >Continuer</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermé</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--E#########################################End UPDATE Compte  Modal######################################################################################-->
